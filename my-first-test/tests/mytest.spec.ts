@@ -27,6 +27,11 @@ test('амжилтгүй нэвтрэх', async ({ page }) => {
     // Нүүр хуудас дээр очоогүй байгаа эсэхийг шалгах
     await expect(page.getByText('Products')).not.toBeVisible();
     await expect(page).toHaveURL('https://www.saucedemo.com/');
+
+    // Алдааны мессеж шалгах
+    await expect(page.getByTestId('error')).toContainText(
+        'Username and password do not match',
+    );
 });
 
 test('бараа сагслах', async ({ page }) => {
@@ -44,6 +49,13 @@ test('бараа сагслах', async ({ page }) => {
     await page.getByRole('button', { name: 'Add to cart' }).first().click();
     // "Remove" товч харагдаж байгаа эсэхийг шалгах
     await expect(page.getByRole('button', { name: 'Remove' }).first()).toBeVisible();
+    // Сагсны тоо зөв эсэх
+    await expect(page.getByTestId('shopping-cart-badge')).toHaveText('1');
+
+    // Сагс руу орж шалгах
+    await page.getByTestId('shopping-cart-link').click();
+    // Эхний бүтээгдэхүүний нэр харагдаж байгаа эсэхийг шалгах
+    await expect(page.getByText('Sauce Labs Backpack')).toBeVisible();
 
     // Logout
     await page.getByRole('button', { name: 'Open Menu' }).click();

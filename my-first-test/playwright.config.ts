@@ -27,6 +27,8 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
+    // saucedemo.com нь `data-test` attribute ашиглан элементүүдэд тест хийхэд хялбар тогтмол id оноож өгсөн
+    testIdAttribute: 'data-test',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
